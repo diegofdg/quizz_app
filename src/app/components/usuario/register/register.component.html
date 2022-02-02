@@ -25,9 +25,12 @@
                             </span>
                         <div class="mb-3">
                             <input type="password" formControlName="repetirPassword" class="form-control form-control-lg" placeholder="Repetir Contraseña">
+                            <span class="text-danger" *ngIf="registerForm.hasError('notSame')">
+                                Contraseñas <strong>distintas</strong>
+                            </span>
                         </div>
                         <button routerLink="/usuario" class="btn btn-secondary btn-lg">Volver</button>
-                        <button type="submit" class="btn btn-primary btn-lg float-end">Aceptar</button>
+                        <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary btn-lg float-end">Aceptar</button>
                     </form>
                 </div>
             </div>
