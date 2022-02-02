@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RecuperarPasswordComponent } from './recuperar-password/recuperar-password.component';
 import { VerificarCorreoComponent } from './verificar-correo/verificar-correo.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { VerificarCorreoComponent } from './verificar-correo/verificar-correo.co
   ],
   imports: [
     CommonModule,
-    UsuarioRoutingModule
+    UsuarioRoutingModule,
+    SharedModule
   ]
 })
 export class UsuarioModule { }
