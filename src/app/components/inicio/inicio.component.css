@@ -17,3 +17,13 @@
     align-items: center;
     height: 100vh;
 }
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+
+.text {
+    color: white;
+}
