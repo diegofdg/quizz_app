@@ -1,1 +1,24 @@
-<p>register works!</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center titulo">Registrar Usuario</h3>
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" formControlName="usuario" class="form-control form-control-lg" placeholder="Correo">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" formControlName="password" class="form-control form-control-lg" placeholder="Contraseña">
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" formControlName="repetirPassword" class="form-control form-control-lg" placeholder="Repetir Contraseña">
+                        </div>
+                        <button routerLink="/usuario" class="btn btn-secondary btn-lg">Volver</button>
+                        <button type="submit" class="btn btn-primary btn-lg float-end">Aceptar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
