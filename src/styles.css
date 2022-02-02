@@ -16,3 +16,7 @@ body {
 .titulo {
     font-family: 'Montserrat', sans-serif;
 }
+
+.text-danger {
+    margin-left: 10px;
+}
