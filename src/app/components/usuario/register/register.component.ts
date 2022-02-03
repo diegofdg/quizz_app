@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  loading = false;
 
   constructor(
     private fb: FormBuilder, 
@@ -32,13 +33,13 @@ export class RegisterComponent implements OnInit {
     const usuario = this.registerForm.get('usuario')?.value;
     const password = this.registerForm.get('password')?.value;    
 
+    this.loading = true;
     this.afAuth.createUserWithEmailAndPassword(usuario, password).then(rta => {
       console.log(rta);
       this.toastr.success('El usuario fue registrado con exito!', 'Usuario registrado!');
       this.router.navigate(['/usuario']);
     }).catch(error => {
-      console.log(error.code);
-      
+      this.loading = false;
       this.toastr.error(this.error(error.code), 'Error');
     });    
   }
