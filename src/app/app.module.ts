@@ -19,6 +19,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DashboardModule } from './components/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     provideStorage(() => getStorage()),
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    DashboardModule
   ],
   providers: [
     ScreenTrackingService,UserTrackingService
