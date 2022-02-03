@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,12 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, public afAuth: AngularFireAuth) {
+  constructor(
+    private fb: FormBuilder, 
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    private toastr: ToastrService
+    ) {
     this.registerForm = this.fb.group({      
     usuario: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],      
@@ -22,13 +29,15 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm);
     const usuario = this.registerForm.get('usuario')?.value;
     const password = this.registerForm.get('password')?.value;
+
     this.afAuth.createUserWithEmailAndPassword(usuario, password).then(rta => {
       console.log(rta);
+      this.toastr.success('El usuario fue registrado con exito!', 'Usuario registrado!');
+      this.router.navigate(['/usuario']);
     }).catch(error => {
-      console.log(error);
+      this.toastr.error('Error!', 'Ha ocurrido un error!');
     });    
   }
 
