@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "quizz-de934": {
+      "hosting": {
+        "quizz": [
+          "quizz-de934"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "quizz-de934"
+  }
+}
