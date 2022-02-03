@@ -30,15 +30,33 @@ export class RegisterComponent implements OnInit {
 
   register() {
     const usuario = this.registerForm.get('usuario')?.value;
-    const password = this.registerForm.get('password')?.value;
+    const password = this.registerForm.get('password')?.value;    
 
     this.afAuth.createUserWithEmailAndPassword(usuario, password).then(rta => {
       console.log(rta);
       this.toastr.success('El usuario fue registrado con exito!', 'Usuario registrado!');
       this.router.navigate(['/usuario']);
     }).catch(error => {
-      this.toastr.error('Error!', 'Ha ocurrido un error!');
+      console.log(error.code);
+      
+      this.toastr.error(this.error(error.code), 'Error');
     });    
+  }
+
+  error(code: string): string {
+    switch (code) {
+      case 'auth/email-already-in-use':
+        return 'El Correo ya esta registrado'
+
+      case 'auth/invalid-email':
+        return 'El Correo es inválido'
+
+      case 'auth/weak-password':
+        return 'La Contraseña es muy débil'
+
+      default:
+        return 'Error desconocido';
+    }
   }
 
   checkPassword(group: FormGroup): any {
