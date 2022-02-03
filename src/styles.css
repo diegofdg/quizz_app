@@ -20,3 +20,7 @@ body {
 .text-danger {
     margin-left: 10px;
 }
+
+.card-titulo {
+    padding: 0px 22px;
+}
