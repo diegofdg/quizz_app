@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private afAuth: AngularFireAuth,
+    private toastr: ToastrService,
+    private _errorService: ErrorService
     ) { 
     this.loginForm = this.fb.group({
       usuario: [ '', [ Validators.required, Validators.email ] ],
@@ -32,10 +36,12 @@ export class LoginComponent implements OnInit {
     this.afAuth.signInWithEmailAndPassword(usuario, password)
       .then((respuesta) => {
         console.log(respuesta);
+        this.toastr.success('El usuario fue registrado con exito!', 'Usuario registrado!');
       })
       .catch((error) => {
         this.loading = false;
-        console.log(error);
+        this.toastr.error(this._errorService.error(error.code), 'Error');
+        this.loginForm.reset();
       });
   }
 }

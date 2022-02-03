@@ -3,6 +3,7 @@ import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@ang
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder, 
     private afAuth: AngularFireAuth,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _errorService: ErrorService
     ) {
     this.registerForm = this.fb.group({      
     usuario: ['', [Validators.required, Validators.email]],
@@ -40,24 +42,9 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/usuario']);
     }).catch(error => {
       this.loading = false;
-      this.toastr.error(this.error(error.code), 'Error');
+      this.toastr.error(this._errorService.error(error.code), 'Error');
+      this.registerForm.reset();
     });    
-  }
-
-  error(code: string): string {
-    switch (code) {
-      case 'auth/email-already-in-use':
-        return 'El Correo ya esta registrado'
-
-      case 'auth/invalid-email':
-        return 'El Correo es inválido'
-
-      case 'auth/weak-password':
-        return 'La Contraseña es muy débil'
-
-      default:
-        return 'Error desconocido';
-    }
   }
 
   checkPassword(group: FormGroup): any {
