@@ -7,6 +7,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ListCuestionariosComponent } from './list-cuestionarios/list-cuestionarios.component';
 import { CrearQuizzComponent } from './crear-quizz/crear-quizz.component';
 import { SharedModule } from '../shared/shared.module';
+import { CrearPreguntasComponent } from './crear-preguntas/crear-preguntas.component';
+import { ListPreguntasComponent } from './list-preguntas/list-preguntas.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { SharedModule } from '../shared/shared.module';
     DashboardComponent,
     NavbarComponent,
     ListCuestionariosComponent,
-    CrearQuizzComponent
+    CrearQuizzComponent,
+    CrearPreguntasComponent,
+    ListPreguntasComponent
   ],
   imports: [
     CommonModule,
