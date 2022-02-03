@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@ang
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public afAuth: AngularFireAuth) {
     this.registerForm = this.fb.group({      
     usuario: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],      
@@ -22,6 +23,13 @@ export class RegisterComponent implements OnInit {
 
   register() {
     console.log(this.registerForm);
+    const usuario = this.registerForm.get('usuario')?.value;
+    const password = this.registerForm.get('password')?.value;
+    this.afAuth.createUserWithEmailAndPassword(usuario, password).then(rta => {
+      console.log(rta);
+    }).catch(error => {
+      console.log(error);
+    });    
   }
 
   checkPassword(group: FormGroup): any {
@@ -29,5 +37,4 @@ export class RegisterComponent implements OnInit {
     const confirmPassword = group.controls['repetirPassword']?.value;
     return pass === confirmPassword ? null : { notSame: true }
   }
-
 }
