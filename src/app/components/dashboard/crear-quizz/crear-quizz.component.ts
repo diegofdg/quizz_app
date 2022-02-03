@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-quizz',
@@ -8,8 +9,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CrearQuizzComponent implements OnInit {
   cuestionarioForm: FormGroup;
+  mostrarError = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     this.cuestionarioForm = this.fb.group({
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
@@ -20,6 +25,11 @@ export class CrearQuizzComponent implements OnInit {
   }
 
   siguiente() {
-    console.log(this.cuestionarioForm);    
+    if(this.cuestionarioForm.invalid) {
+      this.mostrarError = true;
+      setTimeout(() => {
+        this.mostrarError = false;
+      }, 3000);
+    }
   }
 }
