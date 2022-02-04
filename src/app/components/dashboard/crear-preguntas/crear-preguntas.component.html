@@ -26,7 +26,7 @@
                     <div class="col-6">
                         <div formGroupName="respuesta1" class="input-group">
                             <input formControlName="titulo" type="text" class="form-control inputRespuesta" placeholder="Agregar respuesta 1">
-                            <div class="input-group-text">
+                            <div (click)="esCorrecta('1')" class="input-group-text">
                                 <i class="far fa-circle"></i>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                     <div class="col-6">
                         <div formGroupName="respuesta2" class="input-group">
                             <input formControlName="titulo" type="text" class="form-control inputRespuesta" placeholder="Agregar respuesta 2"> 
-                            <div class="input-group-text">
+                            <div (click)="esCorrecta('2')"class="input-group-text">
                                 <i class="far fa-circle"></i>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                     <div class="col-6">
                         <div formGroupName="respuesta3" class="input-group">
                             <input formControlName="titulo" type="text" class="form-control inputRespuesta" placeholder="Agregar respuesta 3 (opcional)"> 
-                            <div class="input-group-text">
+                            <div (click)="esCorrecta('3')" class="input-group-text">
                                 <i class="far fa-circle"></i>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                     <div class="col-6">
                         <div formGroupName="respuesta4" class="input-group">
                             <input formControlName="titulo" type="text" class="form-control inputRespuesta" placeholder="Agregar respuesta 4 (opcional)"> 
-                            <div class="input-group-text">
+                            <div (click)="esCorrecta('4')" class="input-group-text">
                                 <i class="far fa-circle"></i>
                             </div>
                         </div>

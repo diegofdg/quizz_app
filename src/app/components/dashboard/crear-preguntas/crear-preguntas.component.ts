@@ -61,4 +61,19 @@ export class CrearPreguntasComponent implements OnInit {
     });
   }
 
+  esCorrecta(index: string) {
+    let stringRta = 'respuesta';
+    let nroRespuesta = stringRta.concat(index);    
+
+    const estadoRta = this.obtenerEstadoRespuesta(nroRespuesta)
+
+    this.agregarPregunta.get(nroRespuesta)?.patchValue({
+      esCorrecta: !estadoRta
+    })
+  }
+
+  obtenerEstadoRespuesta(nroRespuesta: string): boolean {
+    return this.agregarPregunta.get(nroRespuesta)?.get('esCorrecta')?.value;
+  }
+
 }
