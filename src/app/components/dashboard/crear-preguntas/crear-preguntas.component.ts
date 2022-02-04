@@ -52,6 +52,10 @@ export class CrearPreguntasComponent implements OnInit {
   }
 
   sumarRestarSegundos(numero: number) {
+    if(this.seg + numero < 5) {
+      return;
+    }
+
     this.agregarPregunta.patchValue({ 
       segundos: this.seg + numero 
     });
