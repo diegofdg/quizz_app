@@ -20,4 +20,8 @@ export class ListPreguntasComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  eliminarPregunta(index: number) {
+    this.listPreguntas.splice(index, 1);
+  }
+
 }
