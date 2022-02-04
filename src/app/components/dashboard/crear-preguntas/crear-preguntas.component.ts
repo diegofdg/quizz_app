@@ -36,12 +36,11 @@ export class CrearPreguntasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('titulo', this._quizzService.tituloCuestionario);
-    console.log('descripcion', this._quizzService.descripcion);
+        
   }
 
   agregarPreg() {
-    if(this.agregarPregunta.invalid) {
+    if(this.agregarPregunta.invalid || this.todasIncorrectas()) {
       this.error();
       return;
     }
@@ -53,6 +52,18 @@ export class CrearPreguntasComponent implements OnInit {
 
   get puntos() {
     return this.agregarPregunta.get('puntos')?.value;
+  }
+
+  todasIncorrectas() {
+    const array = ['respuesta1','respuesta2','respuesta3','respuesta4'];
+    
+    for (let i = 0; i < array.length; i++) {
+        if(this.agregarPregunta.get(array[i])?.get('esCorrecta')?.value == true) {
+          return false;
+        }
+    }
+
+    return true;
   }
 
   error() {
