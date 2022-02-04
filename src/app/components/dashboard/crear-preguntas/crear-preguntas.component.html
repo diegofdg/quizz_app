@@ -3,6 +3,25 @@
         <div class="col-lg-8 offset-lg-2">
             <form>
                 <input type="text" class="form-control form-control-lg inputPregunta" placeholder="INGRESE PREGUNTA" maxlength="150">
+                <div class="row mt-5">
+                    <div class="col-lg-6 text-center">
+                        <div class="fondo-item">
+                            <p class="tituloSegundosPuntos">SEGUNDOS</p>
+                            <p class="segPuntos">10</p>
+                            <div>
+                                <i class="fas fa-minus sumaResta"></i>
+                                <i class="fas fa-plus sumaResta"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <div class="fondo-item">
+                            <p class="tituloSegundosPuntos">PUNTOS</p>
+                            <p class="segPuntos">1000</p>
+                            <input formControlName="puntos" type="range" class="form-range" min="0" max="2000">
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
