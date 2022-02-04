@@ -104,6 +104,7 @@ export class CrearPreguntasComponent implements OnInit {
       listRespuestas: listRespuestas
     }
 
+    this._quizzService.agregarPregunta(pregunta);
     this.reset();
     
   }
