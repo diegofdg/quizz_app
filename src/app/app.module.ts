@@ -17,6 +17,7 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './components/dashboard/dashboard.module';
@@ -43,7 +44,8 @@ import { DashboardModule } from './components/dashboard/dashboard.module';
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    DashboardModule
+    DashboardModule,
+    AngularFirestoreModule
   ],
   providers: [
     ScreenTrackingService,UserTrackingService
