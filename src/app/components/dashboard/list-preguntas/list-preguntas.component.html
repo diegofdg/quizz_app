@@ -1,4 +1,8 @@
-<div *ngIf="listPreguntas.length > 0" class="row mt-3">
+<div *ngIf="loading" class="d-flex justify-content-center mt-3">
+    <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="listPreguntas.length > 0 && loading == false" class="row mt-3">
     <div class="col-lg-8 offset-lg-2">
         <div *ngFor="let pregunta of listPreguntas; let i = index" class="card mb-3">
             <div class="card-body text-center">
