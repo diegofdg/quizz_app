@@ -39,4 +39,8 @@ export class CrearPreguntasComponent implements OnInit {
     console.log('descripcion', this._quizzService.descripcion);
   }
 
+  agregarPreg() {
+    console.log(this.agregarPregunta);
+  }
+
 }
