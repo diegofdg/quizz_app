@@ -7,10 +7,10 @@
                     <div class="col-lg-6 text-center">
                         <div class="fondo-item">
                             <p class="tituloSegundosPuntos">SEGUNDOS</p>
-                            <p class="segPuntos">10</p>
+                            <p class="segPuntos">{{seg}}</p>
                             <div>
-                                <i class="fas fa-minus sumaResta"></i>
-                                <i class="fas fa-plus sumaResta"></i>
+                                <i class="fas fa-minus sumaResta" (click)="sumarRestarSegundos(-1)"></i>
+                                <i class="fas fa-plus sumaResta" (click)="sumarRestarSegundos(1)"></i>
                             </div>
                         </div>
                     </div>
