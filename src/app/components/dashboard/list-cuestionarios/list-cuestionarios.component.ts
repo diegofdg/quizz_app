@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Cuestionario } from 'src/app/models/Cuestionario';
 import { QuizzService } from 'src/app/services/quizz.service';
@@ -19,7 +20,8 @@ export class ListCuestionariosComponent implements OnInit, OnDestroy {
   constructor(
     private afAuth: AngularFireAuth, 
     private router: Router,
-    private _quizzService: QuizzService
+    private _quizzService: QuizzService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -57,4 +59,16 @@ export class ListCuestionariosComponent implements OnInit, OnDestroy {
       }
     });
    }
+
+   eliminarCuestionario(id: string) {
+    this.loading = true;
+
+    this._quizzService.eliminarCuestionario(id).then(data => {
+      this.toastr.error('El Cuestionario fue eliminado con exito', 'Registro eliminado!');
+      this.loading = false;
+    }).catch(() =>{
+      this.loading = false;
+      this.toastr.error('Opss.. ocurrio un error', 'Error');
+    });
+  }
 }

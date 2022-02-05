@@ -28,11 +28,23 @@
                                 <td>
                                     <i [routerLink]="['/dashboard/verCuestionario', cuestionario.id]" class="fas fa-search"></i>
                                     <i class="fas fa-chart-line"></i>
-                                    <i class="fas fa-trash"></i>
+                                    <i (click)="eliminarCuestionario(cuestionario.id!)" class="fas fa-trash"></i>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="listCuestionarios.length == 0 && !loading" class="container">
+    <div class="row mt-3">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5>No hay cuestionarios para mostrar</h5>
                 </div>
             </div>
         </div>
