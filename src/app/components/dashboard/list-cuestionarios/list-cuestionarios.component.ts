@@ -12,7 +12,9 @@ import { QuizzService } from 'src/app/services/quizz.service';
 })
 export class ListCuestionariosComponent implements OnInit, OnDestroy {
   suscriptionUser: Subscription = new Subscription();
+  suscriptionQuizz: Subscription = new Subscription();
   listCuestionarios: Cuestionario[] = [];
+  loading = false;
   
   constructor(
     private afAuth: AngularFireAuth, 
@@ -21,6 +23,7 @@ export class ListCuestionariosComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.suscriptionUser = this.afAuth.user.subscribe(user => {
       console.log(user);
       if (user && user.emailVerified) {
@@ -33,18 +36,26 @@ export class ListCuestionariosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.suscriptionUser.unsubscribe();
+    this.suscriptionQuizz.unsubscribe();
   }
 
   getCuestionarios(uid: string) {
-    this._quizzService.getCuestionarioByIdUser(uid).subscribe(data => {
-       this.listCuestionarios = [];
-       data.forEach((element:any) => {
-         this.listCuestionarios.push({
-           id: element.payload.doc.id,
-           ...element.payload.doc.data()
-         })
-       });
-       console.log(this.listCuestionarios);
-     });
+    this.suscriptionQuizz == this._quizzService.getCuestionarioByIdUser(uid).subscribe({
+      next: (responseOK) => {
+        this.listCuestionarios = [];
+        this.loading = false;
+        responseOK.forEach((element:any) => {
+          this.listCuestionarios.push({
+            id: element.payload.doc.id,
+            ...element.payload.doc.data()
+          })
+        });
+        console.log(this.listCuestionarios);
+      },
+      error: (responseFail) => {
+        console.log(responseFail);
+        this.loading = false;
+      }
+    });
    }
 }
