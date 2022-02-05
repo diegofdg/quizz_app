@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RespuestaQuizzService } from 'src/app/services/respuesta-quizz.service';
 
 @Component({
   selector: 'app-inicio',
@@ -8,19 +9,45 @@ import { Component, OnInit } from '@angular/core';
 export class InicioComponent implements OnInit {
   error: boolean = false;
   pin: string = '';
+  errorText = '';
+  loading = false;
 
-  constructor() { }
+  constructor(private respuestaQuizz: RespuestaQuizzService) { }
 
   ngOnInit(): void {
   }
 
   ingresar() {
-    if(this.pin === '') {
-      this.error = true;
+    console.log(this.pin);
+    if(this.pin == '') {
+      this.errorMensaje('Por favor ingrese PIN');
+      return;
+     }
+    
+    this.loading = true;
 
-      setTimeout(() => {
-        this.error = false;
-      }, 3000);
-    }
+    this.respuestaQuizz.searchByCode(this.pin).subscribe({
+      next: (responseOK) => {
+        console.log(responseOK.empty);
+        this.loading = false;
+        if(responseOK.empty == true) {
+          this.errorMensaje('PIN invalido');
+        }
+      },
+      error: (responseFail) => {
+        console.log(responseFail);
+        this.loading = false;
+      }
+    });
+  }
+
+  errorMensaje(text: string) {
+    this.errorText = text;
+    this.error = true;
+    this.pin = '';
+
+    setTimeout(() => {
+      this.error = false;
+    }, 3000);
   }
 }
