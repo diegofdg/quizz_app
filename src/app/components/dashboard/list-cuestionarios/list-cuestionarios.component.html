@@ -26,7 +26,7 @@
                                 <td>{{ cuestionario.cantPreguntas }}</td>
                                 <td><span class="badge bg-black">{{ cuestionario.codigo }}</span></td>
                                 <td>
-                                    <i class="fas fa-search"></i>
+                                    <i [routerLink]="['/dashboard/verCuestionario', cuestionario.id]" class="fas fa-search"></i>
                                     <i class="fas fa-chart-line"></i>
                                     <i class="fas fa-trash"></i>
                                 </td>

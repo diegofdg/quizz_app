@@ -29,4 +29,8 @@ export class QuizzService {
   getCuestionarioByIdUser(uid: string): Observable<any> {
     return this._firestore.collection('cuestionarios', ref => ref.where('uid', '==', uid)).snapshotChanges();
   }
+
+  getCuestionario(id: string): Observable<any> {
+    return this._firestore.collection('cuestionarios').doc(id).get();
+  }
 }
