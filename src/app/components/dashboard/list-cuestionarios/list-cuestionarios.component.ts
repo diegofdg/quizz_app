@@ -25,7 +25,6 @@ export class ListCuestionariosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loading = true;
     this.suscriptionUser = this.afAuth.user.subscribe(user => {
-      console.log(user);
       if (user && user.emailVerified) {
         this.getCuestionarios(user.uid);
       } else {
