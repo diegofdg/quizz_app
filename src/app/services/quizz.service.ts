@@ -25,4 +25,8 @@ export class QuizzService {
   crearCuestionario(cuestionario: Cuestionario): Promise<any> {
     return this._firestore.collection('cuestionarios').add(cuestionario);
   }
+
+  getCuestionarioByIdUser(uid: string): Observable<any> {
+    return this._firestore.collection('cuestionarios', ref => ref.where('uid', '==', uid)).snapshotChanges();
+  }
 }
