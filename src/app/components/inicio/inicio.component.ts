@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Cuestionario } from 'src/app/models/Cuestionario';
 import { RespuestaQuizzService } from 'src/app/services/respuesta-quizz.service';
 
 @Component({
@@ -6,33 +8,44 @@ import { RespuestaQuizzService } from 'src/app/services/respuesta-quizz.service'
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
-export class InicioComponent implements OnInit {
+export class InicioComponent implements OnInit, OnDestroy {
   error: boolean = false;
   pin: string = '';
   errorText = '';
   loading = false;
+  suscriptionCode: Subscription = new Subscription();
 
   constructor(private respuestaQuizz: RespuestaQuizzService) { }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.suscriptionCode.unsubscribe();
+  }
+
   ingresar() {
-    console.log(this.pin);
     if(this.pin == '') {
       this.errorMensaje('Por favor ingrese PIN');
       return;
-     }
+    }
     
     this.loading = true;
 
-    this.respuestaQuizz.searchByCode(this.pin).subscribe({
+    this.suscriptionCode = this.respuestaQuizz.searchByCode(this.pin).subscribe({
       next: (responseOK) => {
-        console.log(responseOK.empty);
         this.loading = false;
         if(responseOK.empty == true) {
           this.errorMensaje('PIN invalido');
-        }
+        } else {
+          responseOK.forEach((element:any) => {
+            const cuestionario: Cuestionario = {
+              id: element.id,
+              ...element.data()
+            }
+            this.respuestaQuizz.cuestionario = cuestionario;
+          });
+         }
       },
       error: (responseFail) => {
         console.log(responseFail);

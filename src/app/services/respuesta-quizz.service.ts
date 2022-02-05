@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { Cuestionario } from '../models/Cuestionario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RespuestaQuizzService {
+  cuestionario!: Cuestionario;
 
   constructor(private _firestore: AngularFirestore) { }
 
