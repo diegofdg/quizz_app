@@ -1,1 +1,15 @@
-<p>ver-cuestionario works!</p>
+<div *ngIf="loading" class="d-flex justify-content-center mt-5">
+    <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="cuestionario != undefined" class="container mt-3">
+    <div class="d-flex justify-content-center mt-3">
+        <div class="card card-titulo">
+            <div class="card-body text-center">
+                <h2 class="titulo">{{ cuestionario.titulo | uppercase }}</h2>
+                <h4>{{ cuestionario.descripcion }}</h4>
+            </div>
+        </div>
+    </div>
+</div>
+

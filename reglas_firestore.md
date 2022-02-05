@@ -7,7 +7,8 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /cuestionarios/{cuestionario} {
-      allow read, write: if
+      allow read;                   // permito leer a todo el mundo
+      allow write: if               // permito guardar a los usuarios logueados
           request.auth.uid != null;
     }
   }
