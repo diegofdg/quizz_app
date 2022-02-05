@@ -5,6 +5,7 @@ import { JugarRoutingModule } from './jugar-routing.module';
 import { IngresarNombreComponent } from './ingresar-nombre/ingresar-nombre.component';
 import { ContadorInicialComponent } from './contador-inicial/contador-inicial.component';
 import { RealizarQuizzComponent } from './realizar-quizz/realizar-quizz.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { RealizarQuizzComponent } from './realizar-quizz/realizar-quizz.componen
   ],
   imports: [
     CommonModule,
-    JugarRoutingModule
+    JugarRoutingModule,
+    SharedModule
   ]
 })
 export class JugarModule { }
