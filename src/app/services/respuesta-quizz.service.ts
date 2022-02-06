@@ -23,4 +23,8 @@ export class RespuestaQuizzService {
   getRespuestaUsuario(id: string): Observable<any> {
     return this._firestore.collection('respuestas').doc(id).get();
   }
+
+  getRespuestaByIdCuestionario(id: string): Observable<any> {
+    return this._firestore.collection('respuestas', ref => ref.where('idCuestionario','==', id)).snapshotChanges();
+  }
 }

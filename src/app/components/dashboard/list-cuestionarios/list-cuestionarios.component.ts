@@ -51,7 +51,6 @@ export class ListCuestionariosComponent implements OnInit, OnDestroy {
             ...element.payload.doc.data()
           })
         });
-        console.log(this.listCuestionarios);
       },
       error: (responseFail) => {
         console.log(responseFail);
