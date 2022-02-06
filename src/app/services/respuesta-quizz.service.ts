@@ -19,4 +19,8 @@ export class RespuestaQuizzService {
   setRespuestaUsuario(respuestaUsuario: any): Promise<any> {
     return this._firestore.collection('respuestas').add(respuestaUsuario);
   }
+
+  getRespuestaUsuario(id: string): Observable<any> {
+    return this._firestore.collection('respuestas').doc(id).get();
+  }
 }

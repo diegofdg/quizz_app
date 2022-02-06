@@ -1,1 +1,7 @@
-<p>respuesta-usuario works!</p>
+<div *ngIf="loading" class="contenedor">
+    <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="!loading" class="container">
+    <p>respuesta-usuario works!</p>
+</div>
