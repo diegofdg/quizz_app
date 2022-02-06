@@ -7,9 +7,9 @@
             <h3 class="titulo">{{  obtenerTitulo() }}</h3>
             <div class="col-lg-6 offset-lg-3">
                 <ul class="list-group mt-3">
-                    <li *ngFor="let respuesta of cuestionario.listPreguntas[indexPregunta].listRespuestas" class="list-group-item animate__animated animate__fadeIn">{{ respuesta.descripcion }}</li>
+                    <li *ngFor="let respuesta of cuestionario.listPreguntas[indexPregunta].listRespuestas; let i = index" class="list-group-item animate__animated animate__fadeIn" (click)="respuestaSeleccionada(respuesta, i)"[ngClass]="addClassOption(respuesta)">{{ respuesta.descripcion }}</li>
                 </ul>
-                <button class="btn btn-principal btn-aceptar mt-3">ACEPTAR</button>
+                <button class="btn btn-principal btn-aceptar mt-3" [disabled]="opcionSeleccionada == null">ACEPTAR</button>
             </div>
         </div>
     </div>

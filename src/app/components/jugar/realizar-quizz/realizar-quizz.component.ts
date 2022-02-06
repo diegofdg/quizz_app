@@ -15,6 +15,9 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   indexPregunta = 0;
   setInterval: any;
 
+  opcionSeleccionada: any;
+  indexSeleccionado: any;
+
   constructor(private _respuestaQuizzService: RespuestaQuizzService, private router: Router) { }
 
   ngOnInit(): void {
@@ -55,6 +58,19 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
       this.segundos = this.segundos - 1;
 
     }, 1000);
+  }
+
+  respuestaSeleccionada(respuesta: any, index: number) {
+    this.opcionSeleccionada = respuesta;
+    this.indexSeleccionado = index;
+  }
+
+  addClassOption(respuesta: any): string {
+    if(respuesta === this.opcionSeleccionada) {
+      return 'classSeleccionada';
+    } else {
+      return '';
+    }
   }
 
 }
