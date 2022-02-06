@@ -50,8 +50,6 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   }
 
   iniciarContador() {
-    console.log(this.opcionSeleccionada);
-    
     this.segundos = this.cuestionario.listPreguntas[this.indexPregunta].segundos;
 
     this.setInterval = setInterval(() => {
@@ -99,8 +97,8 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
     this.indexSeleccionado = undefined;
 
     if(this.cuestionario.listPreguntas.length - 1 === this.indexPregunta){
-      console.log(this.listRespuestaUsuario);
-      
+      this.guardamosRespuestaCuestionario();
+
       this.router.navigate(['/jugar/respuestaUsuario']);
 
     } else {
@@ -125,7 +123,6 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   }
 
   obtenemosSegundos(): string {
-    console.log(this.opcionSeleccionada);
     if(this.opcionSeleccionada === undefined) {
       return 'NO RESPONDIO';
     } else {
@@ -155,6 +152,22 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
     } else {
       this.cantidadCorrectas++;
     }
+  }
+
+  guardamosRespuestaCuestionario() {
+
+    const respuestaCuestionario: any = {
+      idCuestionario: this.cuestionario.id,
+      nombreParticipante: this.nombreParticipante,
+      fecha: new Date(),
+      cantidadPreguntas: this.cuestionario.cantPreguntas,
+      cantidadCorrectas: this.cantidadCorrectas,
+      cantidadIncorrectas: this.cantidadIncorrectas,
+      puntosTotales: this.puntosTotales,
+      listRespuestaUsuario: this.listRespuestaUsuario
+    }
+
+    console.log(respuestaCuestionario);
   }
 
 }
