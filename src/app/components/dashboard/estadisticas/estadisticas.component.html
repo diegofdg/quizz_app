@@ -30,13 +30,27 @@
                                 <td>{{ respuestas.puntosTotales }}</td>
                                 <td>
                                     <i class="fas fa-search"></i>
-                                    <i class="fas fa-trash"></i>
+                                    <i (click)="eliminarRespuestaUsuario(respuestas.id)" class="fas fa-trash"></i>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+    <div *ngIf="listRespuestasUsuario.length == 0" class="row mt-3">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5>No hay respuestas para mostrar</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <button routerLink="/dashboard" style="width: 100%;" class="btn-principal mt-3 mb-3">VOLVER</button>
         </div>
     </div>
 </div>
