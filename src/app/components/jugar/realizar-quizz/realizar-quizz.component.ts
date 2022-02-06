@@ -17,6 +17,10 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
 
   opcionSeleccionada: any;
   indexSeleccionado: any;
+  cantidadCorrectas = 0;
+  cantidadIncorrectas = 0;
+  puntosTotales = 0;
+  listRespuestaUsuario: any[] = [];
 
   constructor(private _respuestaQuizzService: RespuestaQuizzService, private router: Router) { }
 
@@ -80,6 +84,18 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   }
 
   agregarRespuesta() {
+    const respuestaUsuario: any = {
+      titulo: this.cuestionario.listPreguntas[this.indexPregunta].titulo,
+      puntosObtenidos: '',
+      segundos: '',
+      indexRespuestaSeleccionada: '',
+      listRepuestas: this.cuestionario.listPreguntas[this.indexPregunta].listRespuestas,
+    }
+    this.listRespuestaUsuario.push(respuestaUsuario);
+
+    this.opcionSeleccionada = undefined;
+    this.indexSeleccionado = undefined;
+
     if(this.cuestionario.listPreguntas.length - 1 === this.indexPregunta){
       this.router.navigate(['/jugar/respuestaUsuario']);
 
