@@ -12,3 +12,13 @@
     color: black;
     text-align: center;
 }
+
+.classCorrecta {
+    background-color: #198754;
+    color: white;
+}
+
+.classIncorrecta {
+    background-color: #dc3545;
+    color: white;
+}
