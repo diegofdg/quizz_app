@@ -86,7 +86,7 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   agregarRespuesta() {
     const respuestaUsuario: any = {
       titulo: this.cuestionario.listPreguntas[this.indexPregunta].titulo,
-      puntosObtenidos: '',
+      puntosObtenidos: this.obtenemosPuntosPregunta(),
       segundos: '',
       indexRespuestaSeleccionada: '',
       listRepuestas: this.cuestionario.listPreguntas[this.indexPregunta].listRespuestas,
@@ -103,6 +103,21 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
       this.indexPregunta++;
       this.segundos = this.cuestionario.listPreguntas[this.indexPregunta].segundos;
     }    
+  }
+
+  obtenemosPuntosPregunta(): number {
+    if(this.opcionSeleccionada === undefined) {
+      return 0;
+    }
+
+    const puntosPregunta = this.cuestionario.listPreguntas[this.indexPregunta].puntos;
+
+    if(this.opcionSeleccionada.esCorrecta == true) {
+      this.puntosTotales = this.puntosTotales + puntosPregunta;
+      return puntosPregunta;
+    } else {
+      return 0;
+    }
   }
 
 }
