@@ -14,7 +14,8 @@ export class RespuestaUsuarioComponent implements OnInit {
 
   constructor(
     private _respuestaUsuarioService: RespuestaQuizzService,
-    private aRoute: ActivatedRoute
+    private aRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.id = this.aRoute.snapshot.paramMap.get('id')!;
   }
@@ -27,6 +28,11 @@ export class RespuestaUsuarioComponent implements OnInit {
     this.loading = true;
     this._respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe({
       next: (responseOK) => {
+        if(!responseOK.exists) {
+          this.router.navigate(['/']);
+          return;
+        }
+
         this.respuestaCuestionario = responseOK.data();
         this.loading = false;
       },
@@ -35,6 +41,10 @@ export class RespuestaUsuarioComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  volver() {
+    this.router.navigate(['/']);
   }
 
 }
