@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,14 +15,14 @@ const routes: Routes = [
     path: 'jugar', loadChildren: () => import('./components/jugar/jugar.module').then(m => m.JugarModule)
   },
   {
-    path: 'dashboard', 
+    path: 'dashboard',
     component: DashboardComponent,
-    loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthGuard]
   },
   {
     path: '**', redirectTo: '/', pathMatch: 'full'
-  }
-  
+  }  
 ];
 
 @NgModule({
