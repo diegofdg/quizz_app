@@ -50,13 +50,13 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   }
 
   iniciarContador() {
+    console.log(this.opcionSeleccionada);
+    
     this.segundos = this.cuestionario.listPreguntas[this.indexPregunta].segundos;
 
     this.setInterval = setInterval(() => {
       if(this.segundos === 0) {
-        this.indexPregunta++;
-        clearInterval(this.setInterval);
-        this.iniciarContador();
+        this.agregarRespuesta();
       }
 
       this.segundos = this.segundos - 1;
@@ -80,15 +80,17 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   siguiente() {
     clearInterval(this.setInterval)
     this.agregarRespuesta();
-    this.iniciarContador()
+    this.iniciarContador();
   }
 
   agregarRespuesta() {
+    this.contadorCorrectaIncorrecta();
+
     const respuestaUsuario: any = {
       titulo: this.cuestionario.listPreguntas[this.indexPregunta].titulo,
       puntosObtenidos: this.obtenemosPuntosPregunta(),
       segundos: this.obtenemosSegundos(),
-      indexRespuestaSeleccionada: '',
+      indexRespuestaSeleccionada: this.obtenemosIndexSeleccionado(),
       listRepuestas: this.cuestionario.listPreguntas[this.indexPregunta].listRespuestas,
     }
     this.listRespuestaUsuario.push(respuestaUsuario);
@@ -97,6 +99,8 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
     this.indexSeleccionado = undefined;
 
     if(this.cuestionario.listPreguntas.length - 1 === this.indexPregunta){
+      console.log(this.listRespuestaUsuario);
+      
       this.router.navigate(['/jugar/respuestaUsuario']);
 
     } else {
@@ -121,6 +125,7 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   }
 
   obtenemosSegundos(): string {
+    console.log(this.opcionSeleccionada);
     if(this.opcionSeleccionada === undefined) {
       return 'NO RESPONDIO';
     } else {
@@ -128,6 +133,27 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
       const segundosRespondidos = segundosPregunta - this.segundos;
 
       return segundosRespondidos.toString();
+    }
+  }
+
+  obtenemosIndexSeleccionado(): any {
+    if(this.opcionSeleccionada === undefined) {
+      return '';
+    } else {
+      return this.indexSeleccionado;
+    }
+  }
+
+  contadorCorrectaIncorrecta(){
+    if(this.opcionSeleccionada === undefined) {
+      this.cantidadIncorrectas++;
+      return;
+    }
+
+    if(this.opcionSeleccionada.esCorrecta === false) {
+      this.cantidadIncorrectas++;
+    } else {
+      this.cantidadCorrectas++;
     }
   }
 
