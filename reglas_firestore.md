@@ -11,6 +11,9 @@ service cloud.firestore {
       allow write: if               // permito guardar a los usuarios logueados
           request.auth.uid != null;
     }
+    match /respuestas/{respuesta} {
+      allow read, write;            // permito leer y guardar las respuesas a todo el mundo
+    }
   }
 }
 ```

@@ -16,7 +16,7 @@ const routes: Routes = [
     path: 'realizarQuizz', component: RealizarQuizzComponent
   },
   {
-    path: 'respuestaUsuario', component: RespuestaUsuarioComponent
+    path: 'respuestaUsuario/:id', component: RespuestaUsuarioComponent
   },
 ];
 

@@ -14,6 +14,7 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
   segundos = 0;
   indexPregunta = 0;
   setInterval: any;
+  loading = false;
 
   opcionSeleccionada: any;
   indexSeleccionado: any;
@@ -99,8 +100,6 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
     if(this.cuestionario.listPreguntas.length - 1 === this.indexPregunta){
       this.guardamosRespuestaCuestionario();
 
-      this.router.navigate(['/jugar/respuestaUsuario']);
-
     } else {
       this.indexPregunta++;
       this.segundos = this.cuestionario.listPreguntas[this.indexPregunta].segundos;
@@ -167,7 +166,16 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
       listRespuestaUsuario: this.listRespuestaUsuario
     }
 
-    console.log(respuestaCuestionario);
+    this.loading = true;
+    
+    this._respuestaQuizzService.setRespuestaUsuario(respuestaCuestionario)
+      .then(data => {
+        console.log(data);
+        this.router.navigate(['/jugar/respuestaUsuario', data.id]);
+    }, error => {
+      console.log(error);
+      this.router.navigate(['/']);
+    });
   }
 
 }

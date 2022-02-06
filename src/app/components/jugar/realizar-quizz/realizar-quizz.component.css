@@ -22,3 +22,11 @@
 .btn-aceptar:hover {
     color: white;
 }
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
