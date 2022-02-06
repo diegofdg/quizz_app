@@ -10,6 +10,7 @@ import { RespuestaQuizzService } from 'src/app/services/respuesta-quizz.service'
 export class RespuestaUsuarioComponent implements OnInit {
   id: string;
   loading = false;
+  respuestaCuestionario: any;
 
   constructor(
     private _respuestaUsuarioService: RespuestaQuizzService,
@@ -26,7 +27,7 @@ export class RespuestaUsuarioComponent implements OnInit {
     this.loading = true;
     this._respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe({
       next: (responseOK) => {
-        console.log(responseOK.data());
+        this.respuestaCuestionario = responseOK.data();
         this.loading = false;
       },
       error: (responseFail) => {
