@@ -73,4 +73,20 @@ export class RealizarQuizzComponent implements OnInit, OnDestroy {
     }
   }
 
+  siguiente() {
+    clearInterval(this.setInterval)
+    this.agregarRespuesta();
+    this.iniciarContador()
+  }
+
+  agregarRespuesta() {
+    if(this.cuestionario.listPreguntas.length - 1 === this.indexPregunta){
+      this.router.navigate(['/jugar/respuestaUsuario']);
+
+    } else {
+      this.indexPregunta++;
+      this.segundos = this.cuestionario.listPreguntas[this.indexPregunta].segundos;
+    }    
+  }
+
 }
